@@ -102,8 +102,7 @@ static void BM_Sequential(benchmark::State& state) {
     for (int i = state.range_x(); --i; )
       c.push_back(v);
   }
-  const int64_t items_processed =
-      static_cast<int64_t>(state.iterations()) * state.range_x();
+  const size_t items_processed = state.iterations() * state.range_x();
   state.SetItemsProcessed(items_processed);
   state.SetBytesProcessed(items_processed * sizeof(v));
 }

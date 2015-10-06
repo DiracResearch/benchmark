@@ -99,9 +99,9 @@ inline BENCHMARK_ALWAYS_INLINE int64_t Now() {
   _asm rdtsc
 #elif defined(COMPILER_MSVC)
   return __rdtsc();
-#elif defined(__ARM_ARCH)
-#if (__ARM_ARCH >= 6)  // V6 is the earliest arch that has a standard cyclecount
-  uint32_t pmccntr;
+#elif defined(__ARM_ARCH) || defined(__aarch64__)
+#if (__ARM_ARCH >= 6 && !defined(__aarch64__))  // V6 is the earliest arch that has a standard cyclecount
+  uint32_t pmccntr;                             // and it is not available on aarch64... 
   uint32_t pmuseren;
   uint32_t pmcntenset;
   // Read the user mode perf monitor counter access permissions.

@@ -31,7 +31,7 @@ if (NOT HAVE_CXX_FLAG_STD_CXX11)
 endif()
 
 # Turn compiler warnings up to 11
-if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
+if (${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
   add_cxx_compiler_flag(-W4)
   add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 else()
@@ -58,7 +58,7 @@ endif()
 # Link time optimisation
 if (BENCHMARK_ENABLE_LTO)
   add_cxx_compiler_flag(-flto)
-  if ("${CMAKE_C_COMPILER_ID}" STREQUAL "GNU")
+  if (${CMAKE_C_COMPILER_ID} STREQUAL GNU)
     find_program(GCC_AR gcc-ar)
     if (GCC_AR)
       set(CMAKE_AR ${GCC_AR})
